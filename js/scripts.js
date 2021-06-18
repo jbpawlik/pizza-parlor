@@ -66,11 +66,12 @@ order1.addPizza(pizza2)
 //User Interface Logic
 $(document).ready(function() {
   
+
   
   $('#pizzaButton').submit(function(event) {
     event.preventDefault;
 
-    const 
     
-  })
-})
+  
+  });
+});

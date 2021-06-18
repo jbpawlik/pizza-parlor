@@ -12,6 +12,74 @@
   <title>Pizza Pal</title>
 </head>
 <body>
-    <h1>Order Pizza Online</h1>
+  <div class="container">
+    <h1>Pizza Pal - Order Pizza Online!</h1>
+    <h6>Just like Sandy Bullock in <em>The Net!</em></h6>
+    <div id="orderForm">
+      
+        <or class="row">
+          <div class="col-4">
+            <form id="chooseSize">
+              <h6>Choose your size!</h6>
+              <div class="radio">
+                <label> 
+                  <input type="radio" name="size" value="Regular" checked>Regular
+                </label>
+              </div>
+              <div>
+                <label>
+                  <input type="radio" name="size">Large
+                </label>
+              </div>
+              <div>
+                <label>
+                  <input type="radio" name="size">XL
+                </label>
+              </div>
+            </form>
+          </div>
+          <div class="col-4" id="col1">
+              <form id="chooseTopping">
+              <h6>Choose toppings!</h6>
+              <div class="checkbox">
+                <label> 
+                  <input type="checkbox" class="topping" name="size" value="Regular">Extra cheese
+                </label>
+              </div>
+              <div>
+                <label>
+                  <input type="checkbox" class="topping" name="size">Mushrooms
+                </label>
+              </div>
+              <div>
+                <label>
+                  <input type="checkbox" class="topping" name="size">Anchovies
+                </label>
+              </div>
+            </div>
+            <div class="col-4">
+              <h6>First topping free!</h6>
+              <div class="checkbox">
+                <label> 
+                  <input type="checkbox" class="topping" name="size" value="Regular">Pineapple
+                </label>
+              </div>
+              <div>
+                <label>
+                  <input type="checkbox" class="topping" name="size">Lox
+                </label>
+              </div>
+              <div>
+                <label>
+                  <input type="checkbox" class="topping" name="size">Gouda
+                </label>
+              </div>
+            </form>
+          </div>
+          
+          <button type="submit" class="button" id="makePizza">Make this pizza!</button>
+          </form>
+    </div>
+  </div>
 </body>
 </html>
