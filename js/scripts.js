@@ -10,16 +10,15 @@ function Order(pizzas, totalPrice) {
 function CustomPizza(toppings, size, price) {
   this.toppings = toppings
   this.size = size
-  // this.price = price 
-  // + this.toppings.length
-  // if (size === 'XL') {
-  //   this.price = this.price + 4
-  // } else if (size === 'Large') {
-  //   this.price = this.price + 2
-  // } else {
-  //   return this.price
-  // }
-  // this.name = this.size + " " + this.toppings
+  this.price = price + this.toppings.length
+  if (size === 'XL') {
+    this.price = this.price + 4
+  } else if (size === 'Large') {
+    this.price = this.price + 2
+  } else {
+    return this.price
+  }
+  this.name = this.size + " " + this.toppings
 }
 
 // makePizza function (kinda unnecessary but it's in the prompt)
@@ -54,24 +53,35 @@ Order.prototype.addPizza = function(pizza) {
 //   this.name = this.size + " " + this.topping
 // }
 
-let pizza1 = new CustomPizza(['Cheese', 'Meat'], 'Regular', 10)
-let pizza2 = new CustomPizza(['Extra Cheese'], 'XL', 15)
-let order1 = new Order([], 0, 0)
-// pizza1.namePizza(pizza1)
-pizza1.makePizza()
-pizza2.makePizza()
-order1.addPizza(pizza1)
-order1.addPizza(pizza2)
+// let pizza1 = new CustomPizza(['Cheese', 'Meat'], 'Regular', 10)
+// let pizza2 = new CustomPizza(['Extra Cheese'], 'XL', 15)
+// let order1 = new Order([], 0, 0)
+// // pizza1.namePizza(pizza1)
+// pizza1.makePizza()
+// pizza2.makePizza()
+// order1.addPizza(pizza1)
+// order1.addPizza(pizza2)
 
 //User Interface Logic
 $(document).ready(function() {
   
 
   
-  $('#pizzaButton').submit(function(event) {
-    event.preventDefault;
+  $('button#addToOrder').click(function(event) {
+    event.preventDefault();
+
+    $('#pendingOrder').show();
+    
+    const size = $('input:radio:checked[name=size]').val()
+    const toppings = $('input:checkbox:checked[name=topping]').val()
+    
+    let pizza1 = new CustomPizza(toppings, size, this.price)
 
     
-  
+
+
+    $('#prepLine').append(pizza1)
+
+    
   });
 });

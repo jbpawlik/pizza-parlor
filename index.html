@@ -16,69 +16,68 @@
     <h1>Pizza Pal - Order Pizza Online!</h1>
     <h6>Just like Sandy Bullock in <em>The Net!</em></h6>
     <div id="orderForm">
-      
-        <or class="row">
+      <form id="chooseTopping">
+        <div class="row">
           <div class="col-4">
-            <form id="chooseSize">
-              <h6>Choose your size!</h6>
-              <div class="radio">
-                <label> 
-                  <input type="radio" name="size" value="Regular" checked>Regular
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="radio" name="size">Large
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="radio" name="size">XL
-                </label>
-              </div>
-            </form>
+            <h6>Choose your size!</h6>
+            <div class="radio">
+              <label> 
+                <input type="radio" name="size" value="Regular" checked>Regular
+              </label>
+            </div>
+            <div>
+              <label>
+                <input type="radio" name="size" value="Large">Large
+              </label>
+            </div>
+            <div>
+              <label>
+                <input type="radio" name="size" value="Large">XL
+              </label>
+            </div>
           </div>
           <div class="col-4" id="col1">
-              <form id="chooseTopping">
-              <h6>Choose toppings!</h6>
-              <div class="checkbox">
-                <label> 
-                  <input type="checkbox" class="topping" name="size" value="Regular">Extra cheese
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="checkbox" class="topping" name="size">Mushrooms
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="checkbox" class="topping" name="size">Anchovies
-                </label>
-              </div>
+            <h6>Choose toppings!</h6>
+            <div class="checkbox">
+              <label> 
+                <input type="checkbox" name="topping" class="topping">Extra cheese
+              </label>
             </div>
-            <div class="col-4">
-              <h6>First topping free!</h6>
-              <div class="checkbox">
-                <label> 
-                  <input type="checkbox" class="topping" name="size" value="Regular">Pineapple
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="checkbox" class="topping" name="size">Lox
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="checkbox" class="topping" name="size">Gouda
-                </label>
-              </div>
-            </form>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="topping" class="topping">Mushrooms
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="topping" class="topping">Anchovies
+              </label>
+            </div>
           </div>
-          
-          <button type="submit" class="button" id="makePizza">Make this pizza!</button>
-          </form>
+          <div class="col-4">
+            <h6>First topping free!</h6>
+            <div class="checkbox">
+              <label> 
+                <input type="checkbox" name="topping" class="topping">Pineapple
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="topping" class="topping">Lox
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="topping" class="topping">Gouda
+              </label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="button" id="addToOrder">Add to your order!</button>
+      </form>
+      <div id="pendingOrder">In line for the oven!
+        <p id="prepLine"></p>
+      </div>
     </div>
   </div>
 </body>
