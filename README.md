@@ -1,14 +1,14 @@
-# __Eatza Pizza__
+# __Pizza Pal__
 ### by [James Benjamin Pawlik](http://github.com/jbpawlik)
 
 <img src="" alt="" width="200"/>
 
 ### __Description__
 
-Eatza Pizza is a proof-of-concept website for a pizza parlor. The customer can select one or more individual toppings to put on a pizza. The site returns a price based on the size and amount of toppings.
+Pizza Pal is a proof-of-concept website for a pizza parlor. The customer can select one or more individual toppings to put on a pizza. The site returns a price based on the size and amount of toppings.
 
 ### __Technologies Used__
-Eatza Pizza uses custom HTML and CSS. JavaScript and JQuery are used for the business and interface logic.
+Pizza Pal uses custom HTML and CSS. JavaScript and JQuery are used for the business and interface logic.
 
 ### __Setup/Installation__
 1. Download or clone the [repository](http://github.com/jbpawlik/pizza-parlor) to your local machine
@@ -27,6 +27,16 @@ Expected Output: CustomPizza {toppings: undefined, size: undefined, price: undef
 Test 2: "Given properties, should construct pizza object with those qualities"
 Code: let pizza1 = new CustomPizza('none', 'regular', '$10')
 Expected Output: CustomPizza {toppings: "none", size: "regular", price: "$10"}
+
+4997934 (HEAD -> main) increase price of pizza depending on size
+f210eaf increase price of pizza per topping
+7d40f6a merge name function into addPizza
+4f503e6 add pizza prices to order
+5a1db92 name pizza based off size and topping
+a0a1767 use addPizza protoype to add pizzas to order
+52104ef add Order constructor
+4ef7ab7 add CustomPizza constructor
+edb3303 (gh-pages) add index.html, README.md, scripts.js, styles.css
 
 
 ### __Known Bugs / Future Goals__
