@@ -8,9 +8,10 @@ function Order(pizzas, totalPrice) {
 
 //Make custom pizza
 function CustomPizza(name, toppings, size) {
+  this.name = name
   this.toppings = toppings
   this.size = size
-  this.name = name
+
   // + this.toppings.length
   // if (size === 'XL') {
   //   this.price = this.price + 4
@@ -88,8 +89,13 @@ $(document).ready(function() {
     pizza1.makePizza()
     
 
+    // const pizzaOutput = Object.values(pizza1);
+    // let pizzaString = "";
+    // pizzaOutput.forEach(function(key) {
+    //   pizzaString = pizzaString.concat(pizza1[key] + "\r" );
+    // })
 
-    $('#prepLine').append(pizza1.name)
+    $('#prepLine').append(pizzaString)
 
     
   });
