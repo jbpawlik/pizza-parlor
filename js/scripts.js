@@ -7,22 +7,24 @@ function Order(pizzas, totalPrice) {
 }
 
 //Make custom pizza
-function CustomPizza(toppings, size, price) {
+function CustomPizza(name, toppings, size) {
   this.toppings = toppings
   this.size = size
-  this.price = price + this.toppings.length
-  if (size === 'XL') {
-    this.price = this.price + 4
-  } else if (size === 'Large') {
-    this.price = this.price + 2
-  } else {
-    return this.price
-  }
-  this.name = this.size + " " + this.toppings
+  this.name = name
+  // + this.toppings.length
+  // if (size === 'XL') {
+  //   this.price = this.price + 4
+  // } else if (size === 'Large') {
+  //   this.price = this.price + 2
+  // } else {
+  //   return this.price
+  // }
+  // this.name = this.size + " " + this.toppings
 }
 
 // makePizza function (kinda unnecessary but it's in the prompt)
 CustomPizza.prototype.makePizza = function() {
+this.price = 10
 this.price = this.price + this.toppings.length
 if (this.size === 'XL') {
   this.price = this.price + 4
@@ -31,6 +33,7 @@ if (this.size === 'XL') {
 } else {
   return this.price
 }
+this.name = ''
 this.name = this.size + " " + this.toppings
 }
 
@@ -73,14 +76,20 @@ $(document).ready(function() {
     $('#pendingOrder').show();
     
     const size = $('input:radio:checked[name=size]').val()
-    const toppings = $('input:checkbox:checked[name=topping]').val()
+
+    let toppingArray = $('.topping:checked').map(function() {
+      return this.value;
+    }) .get();
+
+    let name = size + " " + toppingArray.join(" and ")
+    // let pizza2 = new CustomPizza(['Cheese', 'Meat'], 'Regular', 10)
     
-    let pizza1 = new CustomPizza(toppings, size, this.price)
-
+    let pizza1 = new CustomPizza(name, toppingArray, size)
+    pizza1.makePizza()
     
 
 
-    $('#prepLine').append(pizza1)
+    $('#prepLine').append(pizza1.name)
 
     
   });
