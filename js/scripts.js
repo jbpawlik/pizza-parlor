@@ -6,6 +6,15 @@ function Order(pizzas, totalPrice) {
   this.totalPrice = totalPrice
 }
 
+Order.prototype.removePizza = function(id) {
+  if (this.contacts[id] === undefined) {
+    return false;
+  }
+  delete this.contacts[id];
+  return true;
+};
+
+
 //Make custom pizza
 function CustomPizza(name, toppings, size) {
   this.name = name
@@ -68,9 +77,7 @@ Order.prototype.addPizza = function(pizza) {
 
 //User Interface Logic
 $(document).ready(function() {
-  
-
-  
+  attachContactListeners()
   $('button#addToOrder').click(function(event) {
     event.preventDefault();
 
@@ -83,18 +90,36 @@ $(document).ready(function() {
     }) .get();
 
     let name = size + " " + toppingArray.join(" and ")    
-    let pizza1 = new CustomPizza(name, toppingArray, size)
-    pizza1.makePizza()
     
+    let pizza = new CustomPizza(name, toppingArray, size)
+    // let pizza = new CustomPizza(name, toppingArray, size)
+    pizza.makePizza()
+    
+    $('#prepLine').html('<br>' + pizza.name + '<br><br> Price: ' + pizza.price)
+
+    let order = new Order(pizza, 0)
+    order.addPizza(pizza)
+    console.log(order)
+  });
+
+
+  function attachContactListeners() {
+    $('button#removePizza').click(function(event) {
+      event.preventDefault();
+      
+    });
+    // $("#buttons").on("click", ".deleteButton", function() {
+    //   addressBook.deleteContact(this.id);
+    //   $("#show-contact").hide();
+    //   displayContactDetails(addressBook);
+    // });
+  }
+
+
+});
+
     // const pizzaOutput = Object.values(pizza1);
     // let pizzaString = "";
     // pizzaOutput.forEach(function(key) {
     //   pizzaString = pizzaString.concat('<li>' + key + '</li>');
     // })
-
-
-    $('#prepLine').html('<br>' + pizza1.name + '<br><br> Price: ' + pizza1.price)
-
-    
-  });
-});
