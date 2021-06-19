@@ -88,14 +88,14 @@ $(document).ready(function() {
     let pizza1 = new CustomPizza(name, toppingArray, size)
     pizza1.makePizza()
     
-
     // const pizzaOutput = Object.values(pizza1);
     // let pizzaString = "";
     // pizzaOutput.forEach(function(key) {
-    //   pizzaString = pizzaString.concat(pizza1[key] + "\r" );
+    //   pizzaString = pizzaString.concat('<li>' + key + '</li>');
     // })
 
-    $('#prepLine').append(pizzaString)
+
+    $('#prepLine').html(pizza1.name + '<br>' + pizza1.price)
 
     
   });

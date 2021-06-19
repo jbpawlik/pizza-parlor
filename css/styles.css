@@ -1,3 +1,7 @@
 #pendingOrder {
   display: none;
 }
+
+#sizeSelector {
+  border: 1px solid black;
+}
