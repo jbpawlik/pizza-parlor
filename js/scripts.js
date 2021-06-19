@@ -34,8 +34,8 @@ if (this.size === 'XL') {
 } else {
   return this.price
 }
-this.name = ''
-this.name = this.size + " " + this.toppings
+// this.name = ''
+// this.name = this.size + " " + this.toppings
 }
 
 
@@ -82,9 +82,7 @@ $(document).ready(function() {
       return this.value;
     }) .get();
 
-    let name = size + " " + toppingArray.join(" and ")
-    // let pizza2 = new CustomPizza(['Cheese', 'Meat'], 'Regular', 10)
-    
+    let name = size + " " + toppingArray.join(" and ")    
     let pizza1 = new CustomPizza(name, toppingArray, size)
     pizza1.makePizza()
     
@@ -95,7 +93,7 @@ $(document).ready(function() {
     // })
 
 
-    $('#prepLine').html(pizza1.name + '<br>' + pizza1.price)
+    $('#prepLine').html('<br>' + pizza1.name + '<br><br> Price: ' + pizza1.price)
 
     
   });
