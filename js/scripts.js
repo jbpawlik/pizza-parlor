@@ -1,25 +1,24 @@
 // Business Logic
 
 //Make new order
-function Order(pizzas, totalPrice) {
-  this.pizzas = pizzas
-  this.totalPrice = totalPrice
+function Order() {
+  this.pizzas = {}
+  this.totalPrice = 0
 }
 
-Order.prototype.removePizza = function(id) {
-  if (this.contacts[id] === undefined) {
-    return false;
-  }
-  delete this.contacts[id];
-  return true;
-};
-
+//Add new pizza to order
+Order.prototype.addPizza = function(pizza) {
+  // this.name = this.size + " " + this.topping
+  this.pizzas[pizza.name] = pizza
+  this.totalPrice = this.totalPrice + pizza.price
+}
 
 //Make custom pizza
 function CustomPizza(name, toppings, size) {
   this.name = name
   this.toppings = toppings
   this.size = size
+  this.number = 0
 
   // + this.toppings.length
   // if (size === 'XL') {
@@ -36,6 +35,7 @@ function CustomPizza(name, toppings, size) {
 CustomPizza.prototype.makePizza = function() {
 this.price = 10
 this.price = this.price + this.toppings.length
+this.number = this.number += 1;
 if (this.size === 'XL') {
   this.price = this.price + 4
 } else if (this.size === 'Large') {
@@ -43,62 +43,47 @@ if (this.size === 'XL') {
 } else {
   return this.price
 }
-// this.name = ''
-// this.name = this.size + " " + this.toppings
+
 }
 
-
-// if (this.topping === 'extra cheese') {
-//     this.price = this.price + 2;
-//   }
-//   if (this.topping.length > 0) {
-//     this.price = this.price + 2;
-//   }
-
-//Add new pizza to order
-Order.prototype.addPizza = function(pizza) {
-  // this.name = this.size + " " + this.topping
-  this.pizzas[pizza.name] = pizza
-  this.totalPrice = this.totalPrice + pizza.price
-}
-// //Name the pizza based off size and toppings
-// CustomPizza.prototype.namePizza = function() {
-//   this.name = this.size + " " + this.topping
-// }
-
-// let pizza1 = new CustomPizza(['Cheese', 'Meat'], 'Regular', 10)
-// let pizza2 = new CustomPizza(['Extra Cheese'], 'XL', 15)
-// let order1 = new Order([], 0, 0)
-// // pizza1.namePizza(pizza1)
-// pizza1.makePizza()
-// pizza2.makePizza()
-// order1.addPizza(pizza1)
-// order1.addPizza(pizza2)
 
 //User Interface Logic
 $(document).ready(function() {
   attachContactListeners()
+
+  let order = new Order()
+
+  const size = $('input:radio:checked[name=size]').val()
+
+  let toppingArray = $('.topping:checked').map(function() {
+    return this.value;
+  }) .get();
+
+  let name = size + " " + toppingArray.join(", ")    
+  
+  let pizza = new CustomPizza(name, toppingArray, size)
+
+
   $('button#addToOrder').click(function(event) {
     event.preventDefault();
 
     $('#pendingOrder').show();
+    $('.col-3').show();
     
-    const size = $('input:radio:checked[name=size]').val()
-
-    let toppingArray = $('.topping:checked').map(function() {
-      return this.value;
-    }) .get();
-
-    let name = size + " " + toppingArray.join(" and ")    
+    let pizza1 = pizza
     
-    let pizza = new CustomPizza(name, toppingArray, size)
-    // let pizza = new CustomPizza(name, toppingArray, size)
-    pizza.makePizza()
-    
-    $('#prepLine').html('<br>' + pizza.name + '<br><br> Price: ' + pizza.price)
+    if (pizza.number === 0) {
+    pizza.makePizza() 
+    console.log(pizza1);
+    } else if (pizza.number > 0) {
+      
+    }
 
-    let order = new Order(pizza, 0)
-    order.addPizza(pizza)
+
+    $('#prepLine').html('<br>' + pizza1.name + '<br><br> Price: ' + pizza1.price)
+
+    // let order = new Order()
+    order.addPizza(pizza1)
     console.log(order)
   });
 
@@ -106,13 +91,12 @@ $(document).ready(function() {
   function attachContactListeners() {
     $('button#removePizza').click(function(event) {
       event.preventDefault();
-      
+      $('.col-3').hide();
+      delete pizza.number;
+      order.totalPrice = 0
+      console.log(pizza)
+      console.log(order)
     });
-    // $("#buttons").on("click", ".deleteButton", function() {
-    //   addressBook.deleteContact(this.id);
-    //   $("#show-contact").hide();
-    //   displayContactDetails(addressBook);
-    // });
   }
 
 
