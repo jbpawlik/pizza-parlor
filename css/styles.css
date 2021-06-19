@@ -1,4 +1,4 @@
-#pendingOrder {
+#pendingOrder, #col1, #col2, #col3 {
   display: none;
 }
 
@@ -28,8 +28,13 @@ label {
   border: 1px solid black;
   padding: 1em;
   font-size: small;
+  display: flexbox;
+  margin: 2em;
 }
-
+.removePizza {
+  width: 100%;
+  align-self: end;
+}
 #pendingOrder {
   border: 1px solid black;
   padding: 2em;
