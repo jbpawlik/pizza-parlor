@@ -75,7 +75,7 @@ $(document).ready(function() {
     pizza1.makePizza() 
     pizzaA = pizza1
     pizza1.Number = 1
-    $('#prepLine1').html(pizza1.Number + '<br><br>' + pizza1.Name + '<br><br> Price: ' + pizza1.Price)
+    $('#prepLine1').html(pizza1.Name + '<br><br> Price: ' + pizza1.Price)
     $('#col1').show()
     order.addPizza(pizza1)
     // pendingOrders = 1;
@@ -86,7 +86,7 @@ $(document).ready(function() {
     pizzaB = pizza2
     pizza2.Number = 2;
     $('#col2').show()
-    $('#prepLine2').html(pizza2.Number + '<br><br>' + pizza2.Name + '<br><br> Price: ' + pizza2.Price)
+    $('#prepLine2').html(pizza2.Name + '<br><br> Price: ' + pizza2.Price)
     order.addPizza(pizza2);
     // pendingOrders = 2;
     oven2full = true;
@@ -96,7 +96,7 @@ $(document).ready(function() {
     pizza3.Number = 3;
     pizzaC = pizza3
     $('#col3').show()
-    $('#prepLine3').html(pizza3.Number + '<br><br>' + pizza3.Name + '<br><br> Price: ' + pizza3.Price)
+    $('#prepLine3').html(pizza3.Name + '<br><br> Price: ' + pizza3.Price)
     order.addPizza(pizza3)
     // pendingOrders = 3;
     oven3full = true;
