@@ -53,6 +53,10 @@ $(document).ready(function() {
   let pizzaB = {}
   let pizzaC = {}
 
+  let oven1full = false
+  let oven2full = false
+  let oven3full = false
+
   $('button#addToOrder').click(function(event) {
     event.preventDefault();
 
@@ -66,7 +70,7 @@ $(document).ready(function() {
 
     let name = size + " " + toppingArray.join(", ")    
 
-    if (pendingOrders === 0) {
+    if (pendingOrders === 0 && oven1full === false) {
     let pizza1 = new CustomPizza(name, toppingArray, size)
     pizza1.makePizza() 
     pizzaA = pizza1
@@ -75,7 +79,8 @@ $(document).ready(function() {
     $('#col1').show()
     order.addPizza(pizza1)
     pendingOrders = 1;
-    } else if (pendingOrders === 1) {
+    oven1full = true;
+    } else if (pendingOrders === 1 && oven2full === false) {
     let pizza2 = new CustomPizza(name, toppingArray, size)
     pizza2.makePizza() 
     pizzaB = pizza2
@@ -84,7 +89,8 @@ $(document).ready(function() {
     $('#prepLine2').html(pizza2.number + '<br><br>' + pizza2.name + '<br><br> Price: ' + pizza2.price)
     order.addPizza(pizza2);
     pendingOrders = 2;
-    } else if (pendingOrders === 2) {
+    oven2full = true;
+    } else if (pendingOrders === 2 && oven3full === false) {
     let pizza3 = new CustomPizza(name, toppingArray, size)
     pizza3.makePizza()
     pizza3.number = 3;
@@ -92,7 +98,8 @@ $(document).ready(function() {
     $('#col3').show()
     $('#prepLine3').html(pizza3.number + '<br><br>' + pizza3.name + '<br><br> Price: ' + pizza3.price)
     order.addPizza(pizza3)
-    pendingOrders = 3;
+    pendingOrders = 0;
+    oven3full = true;
   }
     $('#totalPrice').text(order.totalPrice)
     
@@ -102,28 +109,31 @@ $(document).ready(function() {
 
     $('button#removePizza1').click(function(event) {
       event.preventDefault();
-      $('#col1').hide()
-      order.removePizza(pizzaA)
-      $('#totalPrice').text(order.totalPrice)
+      $('#col1').hide();
+      order.removePizza(pizzaA);
+      $('#totalPrice').text(order.totalPrice);
       pendingOrders = 0;
+      oven1full = false;
     }
     );
 
     $('button#removePizza2').click(function(event) {
       event.preventDefault();
-      $('#col2').hide()
-      order.removePizza(pizzaB)
-      $('#totalPrice').text(order.totalPrice)
-      pendingOrders = 0;
+      $('#col2').hide();
+      order.removePizza(pizzaB);
+      $('#totalPrice').text(order.totalPrice);
+      pendingOrders = 1;
+      oven2full = false
     }
     );
     
     $('button#removePizza3').click(function(event) {
       event.preventDefault();
-      $('#col3').hide()
-      order.removePizza(pizzaC)
+      $('#col3').hide();
+      order.removePizza(pizzaC);
       $('#totalPrice').text(order.totalPrice)
-      pendingOrders = 0;
+      pendingOrders = 1;
+      oven3full = false;
     }
     );
   
