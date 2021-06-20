@@ -80,7 +80,7 @@ $(document).ready(function() {
     order.addPizza(pizza1)
     pendingOrders = 1;
     oven1full = true;
-    } else if (pendingOrders === 1 && oven2full === false) {
+    } else if ( oven2full === false) {
     let pizza2 = new CustomPizza(name, toppingArray, size)
     pizza2.makePizza() 
     pizzaB = pizza2
@@ -90,7 +90,7 @@ $(document).ready(function() {
     order.addPizza(pizza2);
     pendingOrders = 2;
     oven2full = true;
-    } else if (pendingOrders === 2 && oven3full === false) {
+    } else if (oven3full === false) {
     let pizza3 = new CustomPizza(name, toppingArray, size)
     pizza3.makePizza()
     pizza3.number = 3;
@@ -98,7 +98,7 @@ $(document).ready(function() {
     $('#col3').show()
     $('#prepLine3').html(pizza3.number + '<br><br>' + pizza3.name + '<br><br> Price: ' + pizza3.price)
     order.addPizza(pizza3)
-    pendingOrders = 0;
+    pendingOrders = 3;
     oven3full = true;
   }
     $('#totalPrice').text(order.totalPrice)
@@ -122,7 +122,7 @@ $(document).ready(function() {
       $('#col2').hide();
       order.removePizza(pizzaB);
       $('#totalPrice').text(order.totalPrice);
-      pendingOrders = 1;
+      pendingOrders = 0;
       oven2full = false
     }
     );
@@ -132,7 +132,7 @@ $(document).ready(function() {
       $('#col3').hide();
       order.removePizza(pizzaC);
       $('#totalPrice').text(order.totalPrice)
-      pendingOrders = 1;
+      pendingOrders = 0;
       oven3full = false;
     }
     );
