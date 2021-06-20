@@ -46,8 +46,6 @@ $(document).ready(function() {
 
   let order = new Order()
   
-  // let pendingOrders = 0
-
   let pizzaA = {}
   let pizzaB = {}
   let pizzaC = {}
@@ -78,7 +76,6 @@ $(document).ready(function() {
     $('#prepLine1').html(pizza1.Name + '<br><br> Price: ' + pizza1.Price)
     $('#col1').show()
     order.addPizza(pizza1)
-    // pendingOrders = 1;
     oven1full = true;
     } else if ( oven2full === false) {
     let pizza2 = new CustomPizza(name, toppingArray, size)
@@ -88,7 +85,6 @@ $(document).ready(function() {
     $('#col2').show()
     $('#prepLine2').html(pizza2.Name + '<br><br> Price: ' + pizza2.Price)
     order.addPizza(pizza2);
-    // pendingOrders = 2;
     oven2full = true;
     } else if (oven3full === false) {
     let pizza3 = new CustomPizza(name, toppingArray, size)
@@ -98,7 +94,6 @@ $(document).ready(function() {
     $('#col3').show()
     $('#prepLine3').html(pizza3.Name + '<br><br> Price: ' + pizza3.Price)
     order.addPizza(pizza3)
-    // pendingOrders = 3;
     oven3full = true;
   }
     $('#totalPrice').text(order.totalPrice)
@@ -111,8 +106,9 @@ $(document).ready(function() {
     $('#col1').hide();
     order.removePizza(pizzaA);
     $('#totalPrice').text(order.totalPrice);
-    // pendingOrders = 0;
     oven1full = false;
+    $('#receiptField').hide();
+
   }
   );
 
@@ -121,8 +117,9 @@ $(document).ready(function() {
     $('#col2').hide();
     order.removePizza(pizzaB);
     $('#totalPrice').text(order.totalPrice);
-    // pendingOrders = 0;
     oven2full = false
+    $('#receiptField').hide();
+
   }
   );
   
@@ -131,33 +128,28 @@ $(document).ready(function() {
     $('#col3').hide();
     order.removePizza(pizzaC);
     $('#totalPrice').text(order.totalPrice)
-    // pendingOrders = 0;
     oven3full = false;
+    $('#receiptField').hide();
+
   }
   );
 
   //Generates a receipt from the final order
   $('button#orderFinal').click(function(event) {
   
-  //(Probably not necessary)
-    // orderFinal = order.pizzas
-  // const orderKeys = Object.keys(orderFinal);
-  // const orderValues = Object.values(orderFinal)
-  // let orderString = "";
-  // $('#receiptField').show();
-  // orderValues.forEach(function(key) {
-  //   orderString = orderString.concat(key + orderFinal[key]);
-  //   return orderString
+  let receipt = "";
+  
+  if (oven1full === true) {
+    receipt = 'Thank you for choosing Pizza Pal! <br><br>' + pizzaA.Number + '.  ' + pizzaA.Name + '  $' + pizzaA.Price + '<br>';
+    $('#receiptField').show();
+  }
+  if (oven2full === true) {
+    receipt = receipt.concat('<br>' + pizzaB.Number + '.  ' + pizzaB.Name + '  $' + pizzaB.Price + '<br>');
+  }
+  if (oven3full === true) {
+    receipt = receipt.concat('<br>' + pizzaC.Number + '.  ' + pizzaC.Name + '  $' + pizzaC.Price + '<br>');
+  }
+  $('#receiptField').html('<br>' + receipt + '<br>Order Total: $' + order.totalPrice);
+  });
 
-  // })
-  // Working on outputting receipt as string
-  const pizzaStringA = JSON.stringify(pizzaA)
-  const pizzaStringB = JSON.stringify(pizzaB)
-  const pizzaStringC = JSON.stringify(pizzaC)
-  $('#receiptField').text(pizzaStringA + pizzaStringB + pizzaStringC)
-  $('#receiptField').show();
-    console.log(pizzaString)
-  })
-
-    
 });
