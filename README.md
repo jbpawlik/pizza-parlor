@@ -7,7 +7,7 @@
 
 ### __Description__
 
-Pizza Pal is a proof-of-concept website for a pizza parlor. The customer can select one or more individual toppings to put on a pizza. The site returns a price based on the size and amount of toppings.
+Pizza Pal is a proof-of-concept website for a pizza parlor. The customer can select one or more individual toppings to put on a pizza, then add the pizzas to an order. The site returns a total price based on the size and amount of toppings.
 
 ### __Technologies Used__
 Pizza Pal uses custom HTML and CSS. JavaScript and JQuery are used for the business and interface logic.

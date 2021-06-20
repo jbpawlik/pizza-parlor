@@ -15,7 +15,7 @@
   <div class="container">
     <div class="jumbotron">
       <h1>Pizza Pal - Order Pizza Online!</h1>
-      <img src="img/TheNetPizza.jpg">
+      <img id="headerImage" src="img/TheNetPizza.jpg">
       <h5>Just like Sandy Bullock in <em>The Net!</em></h5>
     </div>
     <div id="orderForm">
@@ -79,7 +79,7 @@
       </form>
     </div>
     <button type="submit" class="button" id="addToOrder">Add to your order!</button>
-    <div id="pendingOrder"><h6>In line for the oven!</h6>
+    <div id="pendingOrder"><h5>Pizza Loading Zone</h5>
       <div class="row">
         <div class="col-3" id="col1"> 
           <ul id="prepLine1"></ul>
@@ -95,6 +95,10 @@
         </div>
       </div>
       <p>Total: $<span id="totalPrice"></span></p>
+      <button type="submit" class="button" id="orderFinal">Finalize My Order</button>
+      <div id="receiptField">
+        
+      </div>
     </div>  
   </div>
 </body>
