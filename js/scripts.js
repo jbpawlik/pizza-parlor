@@ -8,7 +8,6 @@ function Order() {
 
 //Add new pizza to order
 Order.prototype.addPizza = function(pizza) {
-  // this.name = this.size + " " + this.topping
   this.pizzas[pizza.number] = pizza
   this.totalPrice = this.totalPrice + pizza.price
 }
@@ -27,7 +26,7 @@ function CustomPizza(name, toppings, size) {
   this.number = 0
 }
 
-// makePizza function (kinda unnecessary but it's in the prompt)
+// makePizza function
 CustomPizza.prototype.makePizza = function() {
   this.price = 10
   this.price = this.price + this.toppings.length
