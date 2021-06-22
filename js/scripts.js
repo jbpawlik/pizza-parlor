@@ -62,7 +62,7 @@ $(document).ready(function() {
     
     let name = size + " " + toppingArray.join(" and ");
 
-    if ( oven1full === false) {
+    if (oven1full === false) {
     pizzaA = new CustomPizza(name, toppingArray, size);
     pizzaA.makePizza();
     pizzaA.Number = 1;
@@ -70,7 +70,7 @@ $(document).ready(function() {
     $('#col1').show();
     order.addPizza(pizzaA);
     return oven1full = true;
-    } else if ( oven2full === false) {
+    } else if (oven2full === false) {
     pizzaB = new CustomPizza(name, toppingArray, size);
     pizzaB.makePizza();
     pizzaB.Number = 2;
@@ -96,9 +96,8 @@ $(document).ready(function() {
     order.removePizza(pizzaA);
     $('#totalPrice').text(order.totalPrice);
     oven1full = false;
-    $('#receiptField').hide();
-    }
-  );
+    $('#receiptField').hide(); 
+  });
 
   $('button#removePizza2').click(function(event) {
     event.preventDefault();
@@ -107,8 +106,7 @@ $(document).ready(function() {
     $('#totalPrice').text(order.totalPrice);
     oven2full = false;
     $('#receiptField').hide();
-    }
-  );
+  });
   
   $('button#removePizza3').click(function(event) {
     event.preventDefault();
@@ -117,8 +115,7 @@ $(document).ready(function() {
     $('#totalPrice').text(order.totalPrice)
     oven3full = false;
     $('#receiptField').hide();
-    }
-  );
+  });
 
   //Generates a receipt from the final order
   $('button#orderFinal').click(function(event) {
