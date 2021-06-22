@@ -23,14 +23,12 @@ function CustomPizza(name, toppings, size) {
   this.Name = name;
   this.Toppings = toppings;
   this.Size = size;
-  this.Number = 0;
+  this.Price = 10;
 }
 
 // makePizza function
 CustomPizza.prototype.makePizza = function() {
-  this.Price = 10;
   this.Price = this.Price + this.Toppings.length;
-  this.Number = this.Number += 1;
   if (this.Size === 'XL') {
     this.Price = this.Price + 4;
   } else if (this.Size === 'Large') {
@@ -46,17 +44,12 @@ $(document).ready(function() {
 
   let order = new Order();
   
-  let pizzaA = {};
-  let pizzaB = {};
-  let pizzaC = {};
-
   let oven1full = false;
   let oven2full = false;
   let oven3full = false;
 
   // Add pizzas to order
-  $('button#addToOrder').click(function(event) {
-    event.preventDefault();
+  $('button#addToOrder').click(function() {
 
     $('#pendingOrder').show();
 
@@ -64,41 +57,37 @@ $(document).ready(function() {
     
     let toppingArray = $('.topping:checked').map(function() {
       return this.value;
-    }) .get();
-
+    }) 
+    .get();
+    
     let name = size + " " + toppingArray.join(" and ");
 
     if ( oven1full === false) {
-    let pizza1 = new CustomPizza(name, toppingArray, size);
-    pizza1.makePizza();
-    pizzaA = pizza1;
-    pizza1.Number = 1;
-    $('#prepLine1').html(pizza1.Name + '<br><br> Price: ' + pizza1.Price);
+    pizzaA = new CustomPizza(name, toppingArray, size);
+    pizzaA.makePizza();
+    pizzaA.Number = 1;
+    $('#prepLine1').html(pizzaA.Name + '<br><br> Price: ' + pizzaA.Price);
     $('#col1').show();
-    order.addPizza(pizza1);
-    oven1full = true;
+    order.addPizza(pizzaA);
+    return oven1full = true;
     } else if ( oven2full === false) {
-    let pizza2 = new CustomPizza(name, toppingArray, size);
-    pizza2.makePizza() ;
-    pizzaB = pizza2;
-    pizza2.Number = 2;
+    pizzaB = new CustomPizza(name, toppingArray, size);
+    pizzaB.makePizza();
+    pizzaB.Number = 2;
     $('#col2').show()
-    $('#prepLine2').html(pizza2.Name + '<br><br> Price: ' + pizza2.Price);
-    order.addPizza(pizza2);
-    oven2full = true;
+    $('#prepLine2').html(pizzaB.Name + '<br><br> Price: ' + pizzaB.Price);
+    order.addPizza(pizzaB);
+    return oven2full = true;
     } else if (oven3full === false) {
-    let pizza3 = new CustomPizza(name, toppingArray, size);
-    pizza3.makePizza();
-    pizza3.Number = 3;
-    pizzaC = pizza3;
+    pizzaC = new CustomPizza(name, toppingArray, size);
+    pizzaC.makePizza();
+    pizzaC.Number = 3;
     $('#col3').show();
-    $('#prepLine3').html(pizza3.Name + '<br><br> Price: ' + pizza3.Price);
-    order.addPizza(pizza3);
-    oven3full = true;
-  }
-    $('#totalPrice').text(order.totalPrice);
+    $('#prepLine3').html(pizzaC.Name + '<br><br> Price: ' + pizzaC.Price);
+    order.addPizza(pizzaC);
+    return oven3full = true;
     }
-  );
+  });
 
   // Remove pizzas from order
   $('button#removePizza1').click(function(event) {
@@ -135,19 +124,17 @@ $(document).ready(function() {
   $('button#orderFinal').click(function(event) {
   
   let receipt = "Thank you for choosing Pizza Pal! <br>";
-  
+
   if (oven1full === true) {
     receipt = 'Thank you for choosing Pizza Pal! <br><br>' + '<li> ' + pizzaA.Name + '  $' + pizzaA.Price + '</li>';
-    $('#receiptField').show();
   }
   if (oven2full === true) {
     receipt = receipt.concat('<br>' + '<li> ' + pizzaB.Name + '  $' + pizzaB.Price + '</li>');
-    $('#receiptField').show();
   }
   if (oven3full === true) {
     receipt = receipt.concat('<br>' + '<li> ' + pizzaC.Name + '  $' + pizzaC.Price + '</li>');
-    $('#receiptField').show();
   }
+  $('#receiptField').show();
   $('#receiptField').html(receipt + '<br>Order Total: $' + order.totalPrice);
   });
 });
