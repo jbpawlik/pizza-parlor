@@ -87,6 +87,7 @@ $(document).ready(function() {
     order.addPizza(pizzaC);
     return oven3full = true;
     }
+    $('#totalPrice').text(order.totalPrice);
   });
 
   // Remove pizzas from order
