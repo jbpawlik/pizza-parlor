@@ -44,9 +44,9 @@ $(document).ready(function() {
 
   let order = new Order();
   
-  let oven1full = false;
-  let oven2full = false;
-  let oven3full = false;
+  let oven1Full = false;
+  let oven2Full = false;
+  let oven3Full = false;
 
   // Add pizzas to order
   $('button#addToOrder').click(function() {
@@ -57,82 +57,80 @@ $(document).ready(function() {
     
     let toppingArray = $('.topping:checked').map(function() {
       return this.value;
-    }) 
-    .get();
+    }).get();
     
     let name = size + " " + toppingArray.join(" and ");
 
-    if (oven1full === false) {
+    if (oven1Full === false) {
     pizzaA = new CustomPizza(name, toppingArray, size);
     pizzaA.makePizza();
     pizzaA.Number = 1;
     $('#prepLine1').html(pizzaA.Name + '<br><br> Price: ' + pizzaA.Price);
     $('#col1').show();
     order.addPizza(pizzaA);
-    return oven1full = true;
-    } else if (oven2full === false) {
+    $('#totalPrice').text(order.totalPrice);
+    return oven1Full = true;
+    } else if (oven2Full === false) {
     pizzaB = new CustomPizza(name, toppingArray, size);
     pizzaB.makePizza();
     pizzaB.Number = 2;
     $('#col2').show()
     $('#prepLine2').html(pizzaB.Name + '<br><br> Price: ' + pizzaB.Price);
     order.addPizza(pizzaB);
-    return oven2full = true;
-    } else if (oven3full === false) {
+    $('#totalPrice').text(order.totalPrice);
+    return oven2Full = true;
+    } else if (oven3Full === false) {
     pizzaC = new CustomPizza(name, toppingArray, size);
     pizzaC.makePizza();
     pizzaC.Number = 3;
     $('#col3').show();
     $('#prepLine3').html(pizzaC.Name + '<br><br> Price: ' + pizzaC.Price);
     order.addPizza(pizzaC);
-    return oven3full = true;
-    }
     $('#totalPrice').text(order.totalPrice);
+    return oven3Full = true;
+    } 
   });
 
   // Remove pizzas from order
-  $('button#removePizza1').click(function(event) {
-    event.preventDefault();
+  $('button#removePizza1').click(function() {
     $('#col1').hide();
     order.removePizza(pizzaA);
     $('#totalPrice').text(order.totalPrice);
-    oven1full = false;
+    oven1Full = false;
     $('#receiptField').hide(); 
   });
 
-  $('button#removePizza2').click(function(event) {
-    event.preventDefault();
+  $('button#removePizza2').click(function() {
     $('#col2').hide();
     order.removePizza(pizzaB);
     $('#totalPrice').text(order.totalPrice);
-    oven2full = false;
+    oven2Full = false;
     $('#receiptField').hide();
   });
   
-  $('button#removePizza3').click(function(event) {
-    event.preventDefault();
+  $('button#removePizza3').click(function() {
     $('#col3').hide();
     order.removePizza(pizzaC);
     $('#totalPrice').text(order.totalPrice)
-    oven3full = false;
+    oven3Full = false;
     $('#receiptField').hide();
   });
 
   //Generates a receipt from the final order
-  $('button#orderFinal').click(function(event) {
+  $('button#orderFinal').click(function() {
   
-  let receipt = "Thank you for choosing Pizza Pal! <br>";
+    let receipt = "Thank you for choosing Pizza Pal! <br>";
 
-  if (oven1full === true) {
-    receipt = 'Thank you for choosing Pizza Pal! <br><br>' + '<li> ' + pizzaA.Name + '  $' + pizzaA.Price + '</li>';
-  }
-  if (oven2full === true) {
-    receipt = receipt.concat('<br>' + '<li> ' + pizzaB.Name + '  $' + pizzaB.Price + '</li>');
-  }
-  if (oven3full === true) {
-    receipt = receipt.concat('<br>' + '<li> ' + pizzaC.Name + '  $' + pizzaC.Price + '</li>');
-  }
-  $('#receiptField').show();
-  $('#receiptField').html(receipt + '<br>Order Total: $' + order.totalPrice);
+    if (oven1Full === true) {
+      receipt = 'Thank you for choosing Pizza Pal! <br><br>' + '<li> ' + pizzaA.Name + '  $' + pizzaA.Price + '</li>';
+    }
+    if (oven2Full === true) {
+      receipt = receipt.concat('<br>' + '<li> ' + pizzaB.Name + '  $' + pizzaB.Price + '</li>');
+    }
+    if (oven3Full === true) {
+      receipt = receipt.concat('<br>' + '<li> ' + pizzaC.Name + '  $' + pizzaC.Price + '</li>');
+    }
+    $('#receiptField').show();
+    $('#receiptField').html(receipt + '<br>Order Total: $' + order.totalPrice);
   });
 });
