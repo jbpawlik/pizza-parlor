@@ -8,35 +8,33 @@ function Order() {
 
 //Add new pizza to order
 Order.prototype.addPizza = function(pizza) {
-  this.pizzas[pizza.Number] = pizza;
-  this.totalPrice = this.totalPrice + pizza.Price;
+  this.pizzas[pizza.number] = pizza;
+  this.totalPrice = this.totalPrice + pizza.price;
 }
 
 //Remove pizza from order
 Order.prototype.removePizza = function(pizza) {
-  delete this.pizzas[pizza.Number];
-  this.totalPrice = this.totalPrice - pizza.Price;
+  delete this.pizzas[pizza.number];
+  this.totalPrice = this.totalPrice - pizza.price;
 }
 
 //Make custom pizza
 function CustomPizza(name, toppings, size) {
-  this.Name = name;
-  this.Toppings = toppings;
-  this.Size = size;
-  this.Number = 0;
+  this.name = name;
+  this.toppings = toppings;
+  this.size = size;
+  this.price = 10;
 }
 
 // makePizza function
-CustomPizza.prototype.makePizza = function() {
-  this.Price = 10;
-  this.Price = this.Price + this.Toppings.length;
-  this.Number = this.Number += 1;
-  if (this.Size === 'XL') {
-    this.Price = this.Price + 4;
-  } else if (this.Size === 'Large') {
-    this.Price = this.Price + 2;
+CustomPizza.prototype.pricePizza = function() {
+  this.price = this.price + this.toppings.length;
+  if (this.size === 'XL') {
+    this.price = this.price + 4;
+  } else if (this.size === 'Large') {
+    this.price = this.price + 2;
   } else {
-    return this.Price;
+    return this.price;
   }
 }
 
@@ -45,109 +43,94 @@ CustomPizza.prototype.makePizza = function() {
 $(document).ready(function() {
 
   let order = new Order();
-  
-  let pizzaA = {};
-  let pizzaB = {};
-  let pizzaC = {};
 
-  let oven1full = false;
-  let oven2full = false;
-  let oven3full = false;
+  let oven1Full = false;
+  let oven2Full = false;
+  let oven3Full = false;
 
   // Add pizzas to order
-  $('button#addToOrder').click(function(event) {
-    event.preventDefault();
+  $('button#addToOrder').click(function() {
 
     $('#pendingOrder').show();
 
     const size = $('input:radio:checked[name=size]').val();
-    
+
     let toppingArray = $('.topping:checked').map(function() {
       return this.value;
-    }) .get();
+    }).get();
 
     let name = size + " " + toppingArray.join(" and ");
 
-    if ( oven1full === false) {
-    let pizza1 = new CustomPizza(name, toppingArray, size);
-    pizza1.makePizza();
-    pizzaA = pizza1;
-    pizza1.Number = 1;
-    $('#prepLine1').html(pizza1.Name + '<br><br> Price: ' + pizza1.Price);
+    if (oven1Full === false) {
+    pizzaA = new CustomPizza(name, toppingArray, size);
+    pizzaA.pricePizza();
+    pizzaA.number = 1;
+    $('#prepLine1').html(pizzaA.name + '<br><br> Price: ' + pizzaA.price);
     $('#col1').show();
-    order.addPizza(pizza1);
-    oven1full = true;
-    } else if ( oven2full === false) {
-    let pizza2 = new CustomPizza(name, toppingArray, size);
-    pizza2.makePizza() ;
-    pizzaB = pizza2;
-    pizza2.Number = 2;
-    $('#col2').show()
-    $('#prepLine2').html(pizza2.Name + '<br><br> Price: ' + pizza2.Price);
-    order.addPizza(pizza2);
-    oven2full = true;
-    } else if (oven3full === false) {
-    let pizza3 = new CustomPizza(name, toppingArray, size);
-    pizza3.makePizza();
-    pizza3.Number = 3;
-    pizzaC = pizza3;
-    $('#col3').show();
-    $('#prepLine3').html(pizza3.Name + '<br><br> Price: ' + pizza3.Price);
-    order.addPizza(pizza3);
-    oven3full = true;
-  }
+    order.addPizza(pizzaA);
     $('#totalPrice').text(order.totalPrice);
+    return oven1Full = true;
+    } else if (oven2Full === false) {
+    pizzaB = new CustomPizza(name, toppingArray, size);
+    pizzaB.pricePizza();
+    pizzaB.number = 2;
+    $('#col2').show()
+    $('#prepLine2').html(pizzaB.name + '<br><br> Price: ' + pizzaB.price);
+    order.addPizza(pizzaB);
+    $('#totalPrice').text(order.totalPrice);
+    return oven2Full = true;
+    } else if (oven3Full === false) {
+    pizzaC = new CustomPizza(name, toppingArray, size);
+    pizzaC.pricePizza();
+    pizzaC.number = 3;
+    $('#col3').show();
+    $('#prepLine3').html(pizzaC.name + '<br><br> Price: ' + pizzaC.price);
+    order.addPizza(pizzaC);
+    $('#totalPrice').text(order.totalPrice);
+    return oven3Full = true;
     }
-  );
+  });
 
   // Remove pizzas from order
-  $('button#removePizza1').click(function(event) {
-    event.preventDefault();
+  $('button#removePizza1').click(function() {
     $('#col1').hide();
     order.removePizza(pizzaA);
     $('#totalPrice').text(order.totalPrice);
-    oven1full = false;
+    oven1Full = false;
     $('#receiptField').hide();
-    }
-  );
+  });
 
-  $('button#removePizza2').click(function(event) {
-    event.preventDefault();
+  $('button#removePizza2').click(function() {
     $('#col2').hide();
     order.removePizza(pizzaB);
     $('#totalPrice').text(order.totalPrice);
-    oven2full = false;
+    oven2Full = false;
     $('#receiptField').hide();
-    }
-  );
-  
-  $('button#removePizza3').click(function(event) {
-    event.preventDefault();
+  });
+
+  $('button#removePizza3').click(function() {
     $('#col3').hide();
     order.removePizza(pizzaC);
     $('#totalPrice').text(order.totalPrice)
-    oven3full = false;
+    oven3Full = false;
     $('#receiptField').hide();
-    }
-  );
+  });
 
   //Generates a receipt from the final order
-  $('button#orderFinal').click(function(event) {
-  
-  let receipt = "Thank you for choosing Pizza Pal! <br>";
-  
-  if (oven1full === true) {
-    receipt = 'Thank you for choosing Pizza Pal! <br><br>' + '<li> ' + pizzaA.Name + '  $' + pizzaA.Price + '</li>';
+  $('button#orderFinal').click(function() {
+
+    let receipt = "Thank you for choosing Pizza Pal! <br>";
+
+    if (oven1Full === true) {
+      receipt = 'Thank you for choosing Pizza Pal! <br><br>' + '<li> ' + pizzaA.name + '  $' + pizzaA.price + '</li>';
+    }
+    if (oven2Full === true) {
+      receipt = receipt.concat('<br>' + '<li> ' + pizzaB.name + '  $' + pizzaB.price + '</li>');
+    }
+    if (oven3Full === true) {
+      receipt = receipt.concat('<br>' + '<li> ' + pizzaC.name + '  $' + pizzaC.price + '</li>');
+    }
     $('#receiptField').show();
-  }
-  if (oven2full === true) {
-    receipt = receipt.concat('<br>' + '<li> ' + pizzaB.Name + '  $' + pizzaB.Price + '</li>');
-    $('#receiptField').show();
-  }
-  if (oven3full === true) {
-    receipt = receipt.concat('<br>' + '<li> ' + pizzaC.Name + '  $' + pizzaC.Price + '</li>');
-    $('#receiptField').show();
-  }
-  $('#receiptField').html(receipt + '<br>Order Total: $' + order.totalPrice);
+    $('#receiptField').html(receipt + '<br>Order Total: $' + order.totalPrice);
   });
 });
